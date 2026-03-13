@@ -21,14 +21,14 @@ jobs:
         with:
           filters: |
             frontend:
-              - frontend/**
-              - !frontend/dist/**
-              - !frontend/node_modules/**
+              - 'frontend/**'
+              - '!frontend/dist/**'
+              - '!frontend/node_modules/**'
             backend:
-              - backend/**/*.go
-              - backend/go.mod
-              - backend/go.sum
-              - .github/workflows/*backend*.yml
+              - 'backend/**/*.go'
+              - 'backend/go.mod'
+              - 'backend/go.sum'
+              - '.github/workflows/*backend*.yml'
 
   call-frontend:
     needs: changes
