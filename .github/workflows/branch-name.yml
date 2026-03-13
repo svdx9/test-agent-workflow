@@ -12,6 +12,6 @@ jobs:
               uses: deepakputhraya/action-branch-name@master
               with:
                   # Regex for: type/description (e.g., feat/my-feature)
-                  regex: '^ (feat|fix|release|chore)\/[a-z0-9-]+$'
+                  regex: '^(feat|fix|release|chore)\/[a-z0-9-]+$'
                   allowed_prefixes: "feat/,fix/,release/,chore/"
                   ignore: "main,develop"
