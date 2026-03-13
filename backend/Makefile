@@ -15,7 +15,7 @@ GIT_SHA ?= $(shell git rev-parse HEAD 2>/dev/null || printf "unknown")
 BUILD_TIME ?= $(shell date -u +"%Y-%m-%dT%H:%M:%SZ")
 LDFLAGS := -X main.serviceGitSHA=$(GIT_SHA) -X main.serviceBuildTime=$(BUILD_TIME)
 
-GOLANGCI_LINT_VERSION ?= v2.8.0
+GOLANGCI_LINT_VERSION ?= v2.11.3
 GOFUMPT_VERSION ?= v0.9.2
 OAPI_CODEGEN_VERSION ?= v2.6.0
 AIR_VERSION ?= v1.64.5
