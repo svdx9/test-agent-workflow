@@ -1,0 +1,9 @@
+root = "."
+tmp_dir = "bin"
+
+[build]
+cmd = "make build-dev"
+bin = "./bin/test-app"
+delay = 200
+exclude_dir = ["bin", "tools", "internal/api"]
+include_ext = ["go", "yaml"]
