@@ -1,6 +1,6 @@
 .claude/settings.local.json
 .claude/worktrees
 
-backend/.cache
+backend/.cache/
 backend/bin
-backend/tools/bin
+backend/tools/

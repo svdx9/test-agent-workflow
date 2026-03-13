@@ -19,8 +19,9 @@ GOLANGCI_LINT_VERSION ?= v2.8.0
 GOFUMPT_VERSION ?= v0.9.2
 OAPI_CODEGEN_VERSION ?= v2.6.0
 AIR_VERSION ?= v1.64.5
+MIGRATE_VERSION ?= v4.19.1
 
-.PHONY: dev build-dev tidy run build debug-build format generate go-cache-dir lint test frontend-test tools-dir tools-install install-air install-gofumpt install-golangci-lint install-oapi-codegen frontend-install frontend-generate frontend-dev dev-all test
+.PHONY: dev build-dev tidy run build debug-build format generate go-cache-dir lint test frontend-test tools-dir tools-install install-air install-gofumpt install-golangci-lint install-oapi-codegen install-migrate frontend-install frontend-generate frontend-dev dev-all test
 
 go-cache-dir:
 	mkdir -p $(GO_BUILD_CACHE)
@@ -40,7 +41,10 @@ install-oapi-codegen: tools-dir go-cache-dir
 install-air: tools-dir go-cache-dir
 	 $(GO_ENV) GOBIN=$(TOOLS_BIN) $(GO) install github.com/air-verse/air@$(AIR_VERSION)
 
-tools-install: install-gofumpt install-golangci-lint install-oapi-codegen install-air
+install-migrate: tools-dir go-cache-dir
+	 $(GO_ENV) GOBIN=$(TOOLS_BIN) $(GO) install -tags 'postgres' github.com/golang-migrate/migrate/v4/cmd/migrate@$(MIGRATE_VERSION)
+
+tools-install: install-gofumpt install-golangci-lint install-oapi-codegen install-air install-migrate
 
 
 # backend commands
