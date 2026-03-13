@@ -1,20 +1,33 @@
 {
   "compilerOptions": {
-    // General
+    "target": "ES2022",
+    "module": "ESNext",
+    "lib": [
+      "ES2022",
+      "DOM",
+      "DOM.Iterable",
+      "ESNext.Disposable"
+    ],
+    "moduleResolution": "Bundler",
+    "allowImportingTsExtensions": true,
     "jsx": "preserve",
     "jsxImportSource": "solid-js",
-    "target": "ESNext",
-
-    // Modules
-    "allowSyntheticDefaultImports": true,
-    "esModuleInterop": true,
-    "isolatedModules": true,
-    "module": "ESNext",
-    "moduleResolution": "bundler",
-    "noEmit": true,
-
-    // Type Checking & Safety
     "strict": true,
-    "types": ["vite/client"]
-  }
+    "strictPropertyInitialization": true,
+    "noEmit": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "types": [
+      "vite/client",
+      "vitest/globals",
+      "@testing-library/jest-dom"
+    ],
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "skipLibCheck": true
+  },
+  "include": [
+    "src",
+    "vite.config.ts"
+  ]
 }
