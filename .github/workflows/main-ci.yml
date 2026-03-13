@@ -22,6 +22,8 @@ jobs:
           filters: |
             frontend:
               - 'frontend/**'
+              - 'frontend/package.json'
+              - 'frontend/package-lock.json'
               - '!frontend/dist/**'
               - '!frontend/node_modules/**'
             backend:
@@ -29,6 +31,8 @@ jobs:
               - 'backend/go.mod'
               - 'backend/go.sum'
               - '.github/workflows/*backend*.yml'
+      - name: Debug Output
+        run: 'echo "Frontend changed: ${{ steps.filter.outputs.frontend }}"'
 
   call-frontend:
     needs: changes
@@ -44,12 +48,12 @@ jobs:
   all-checks-passed:
     runs-on: ubuntu-latest
     needs:
-      # - call-frontend
+      - call-frontend
       - call-backend
     if: always()
     steps:
       - name: Check Results
         run: |
-          if [[ "${{ needs.call-backend.result }}" == "failure" ]]; then
+          if [[ "${{ needs.call-backend.result }}" == "failure" ]] || [[ "${{ needs.call-frontend.result }}" == "failure" ]]; then
             exit 1
           fi
