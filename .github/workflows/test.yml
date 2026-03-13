@@ -20,7 +20,7 @@ on:
 
 jobs:
   backend-test:
-    name: test
+    name: backend-test
     runs-on: ubuntu-latest
     steps:
       - name: Check out code
@@ -37,8 +37,8 @@ jobs:
         run: go test ./...
         working-directory: backend
 
-  frontend-tests:
-    name: frontend-tests
+  frontend-test:
+    name: frontend-test
     runs-on: ubuntu-latest
     steps:
       - name: Check out code
