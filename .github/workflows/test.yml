@@ -6,6 +6,7 @@ on:
       - "backend/**/*.go"
       - "backend/go.mod"
       - "backend/go.sum"
+      - "frontend/**"
       - ".github/workflows/test.yml"
   push:
     branches:
@@ -14,10 +15,11 @@ on:
       - "backend/**/*.go"
       - "backend/go.mod"
       - "backend/go.sum"
+      - "frontend/**"
       - ".github/workflows/test.yml"
 
 jobs:
-  test:
+  backend-test:
     name: test
     runs-on: ubuntu-latest
     steps:
@@ -34,3 +36,33 @@ jobs:
       - name: Run tests
         run: go test ./...
         working-directory: backend
+
+  frontend-tests:
+    name: frontend-tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+        working-directory: frontend
+
+      - name: Run tests
+        run: npm test
+        working-directory: frontend
+
+      - name: Typecheck
+        run: npm run typecheck
+        working-directory: frontend
+
+      - name: Build
+        run: npm run build
+        working-directory: frontend

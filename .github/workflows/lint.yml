@@ -29,8 +29,8 @@ jobs:
       - name: Set up Go
         uses: actions/setup-go@v6
         with:
-          cache-dependency-path: backend/go.sum
           go-version-file: backend/go.mod
+          cache-dependency-path: backend/go.sum
           cache: true
 
       - name: Run golangci-lint
