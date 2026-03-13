@@ -12,7 +12,7 @@ jobs:
   changes:
     runs-on: ubuntu-latest
     outputs:
-      # frontend: ${{ steps.filter.outputs.frontend }}
+      frontend: ${{ steps.filter.outputs.frontend }}
       backend: ${{ steps.filter.outputs.backend }}
     steps:
       - uses: actions/checkout@v6
@@ -21,9 +21,19 @@ jobs:
         with:
           filters: |
             frontend:
-              - frontend/**
+              - 'frontend/**
+              - !frontend/dist/**
+              - !frontend/node_modules/**
             backend:
-              - backend/**
+              - backend/**/*.go
+              - backend/go.mod
+              - backend/go.sum
+              - .github/workflows/*backend*.yml
+
+  call-frontend:
+    needs: changes
+    if: needs.changes.outputs.frontend == 'true'
+    uses: ./.github/workflows/test-and-lint-frontend.yml
 
   # Call the external Backend workflow
   call-backend:
