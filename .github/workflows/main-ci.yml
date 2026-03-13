@@ -1,4 +1,4 @@
-name: Main CI Orchestrator
+name: ci workflow
 
 on:
   workflow_dispatch:
@@ -21,7 +21,7 @@ jobs:
         with:
           filters: |
             frontend:
-              - 'frontend/**
+              - frontend/**
               - !frontend/dist/**
               - !frontend/node_modules/**
             backend:
