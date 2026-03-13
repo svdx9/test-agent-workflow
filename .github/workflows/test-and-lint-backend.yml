@@ -53,4 +53,3 @@ jobs:
           version: latest
           working-directory: backend
           args: ./...
-          skip-cache: true
