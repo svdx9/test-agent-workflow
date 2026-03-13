@@ -3,40 +3,14 @@ name: Test
 on:
   pull_request:
     paths:
-      - "backend/**/*.go"
-      - "backend/go.mod"
-      - "backend/go.sum"
       - "frontend/**"
-      - ".github/workflows/test.yml"
   push:
     branches:
       - main
     paths:
-      - "backend/**/*.go"
-      - "backend/go.mod"
-      - "backend/go.sum"
       - "frontend/**"
-      - ".github/workflows/test.yml"
 
 jobs:
-  backend-test:
-    name: backend-test
-    runs-on: ubuntu-latest
-    steps:
-      - name: Check out code
-        uses: actions/checkout@v4
-
-      - name: Set up Go
-        uses: actions/setup-go@v6
-        with:
-          go-version-file: backend/go.mod
-          cache-dependency-path: backend/go.sum
-          cache: true
-
-      - name: Run tests
-        run: go test ./...
-        working-directory: backend
-
   frontend-test:
     name: frontend-test
     runs-on: ubuntu-latest

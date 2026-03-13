@@ -1,0 +1,54 @@
+name: Test
+
+on:
+  pull_request:
+    paths:
+      - "backend/**/*.go"
+      - "backend/go.mod"
+      - "backend/go.sum"
+  push:
+    branches:
+      - main
+    paths:
+      - "backend/**/*.go"
+      - "backend/go.mod"
+      - "backend/go.sum"
+
+jobs:
+  backend-test:
+    name: backend-test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Set up Go
+        uses: actions/setup-go@v6
+        with:
+          go-version-file: backend/go.mod
+          cache-dependency-path: backend/go.sum
+          cache: true
+
+      - name: Run tests
+        run: go test ./...
+        working-directory: backend
+
+  golangci:
+    name: backend-lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Set up Go
+        uses: actions/setup-go@v6
+        with:
+          go-version-file: backend/go.mod
+          cache-dependency-path: backend/go.sum
+          cache: true
+
+      - name: Run golangci-lint
+        uses: golangci/golangci-lint-action@v9
+        with:
+          version: v2.8.0
+          working-directory: backend
