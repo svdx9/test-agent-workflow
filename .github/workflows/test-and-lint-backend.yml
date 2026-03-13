@@ -1,18 +1,19 @@
 name: Test
 
 on:
-  pull_request:
-    paths:
-      - "backend/**/*.go"
-      - "backend/go.mod"
-      - "backend/go.sum"
-  push:
-    branches:
-      - main
-    paths:
-      - "backend/**/*.go"
-      - "backend/go.mod"
-      - "backend/go.sum"
+  workflow_call:
+  # pull_request:
+  #   paths:
+  #     - "backend/**/*.go"
+  #     - "backend/go.mod"
+  #     - "backend/go.sum"
+  # push:
+  #   branches:
+  #     - main
+  #   paths:
+  #     - "backend/**/*.go"
+  #     - "backend/go.mod"
+  #     - "backend/go.sum"
 
 jobs:
   backend-test:
@@ -50,5 +51,5 @@ jobs:
       - name: Run golangci-lint
         uses: golangci/golangci-lint-action@v9
         with:
-          version: v2.8.0
+          version: v2.3.4
           working-directory: backend
