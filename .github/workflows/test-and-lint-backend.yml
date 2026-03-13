@@ -45,11 +45,12 @@ jobs:
         uses: actions/setup-go@v6
         with:
           go-version-file: backend/go.mod
-          cache-dependency-path: backend/go.sum
-          cache: true
+          cache: false
 
       - name: Run golangci-lint
         uses: golangci/golangci-lint-action@v9
-        # with:
-        #   version: v2.3.4
-        #   working-directory: backend
+        with:
+          version: latest
+          working-directory: backend
+          args: ./...
+          skip-cache: true
